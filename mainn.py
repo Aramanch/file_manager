@@ -1,6 +1,6 @@
 import os
 import shutil
-from settings import *
+from sets import *
 
 
 
@@ -46,15 +46,18 @@ while request != 'end':
 
     elif request == "3":
         name = input()
-        direct = f"{direct}/{name}"
-        os.chdir(direct)
+        dirrr = f"{direct}/{name}"
+        os.chdir(dirrr)
         print(os.getcwd())
 
 
 
     elif request == "4":
-        os.chdir(direct)
+        os.chdir(f"{direct}")
         print(os.getcwd())
+
+    elif request == "17":
+        print(os.listdir(f"{os.getcwd()}"))
 
     elif request == "5":
         name = input('Имя файла:')
@@ -87,18 +90,12 @@ while request != 'end':
         shutil.copy(f"{direct}/{papka}/{name}",f"{direct}/{ppapka}")
 
     elif request == "10":
-        papk = input('Из какого каталога:')
+        cur_kat = os.getcwd()
         naming = input('Файл: ')
         ppapkka = input("Папка, в которую перемещаем: ")
-        os.replace(f"{direct}/{papk}/{naming}", f"{direct}/{ppapkka}/{naming}")
+        os.replace(f"{cur_kat}/{naming}", f"{direct}/{ppapkka}/{naming}")
 
     elif request == "11":
         naming = input('Файл: ')
         new_name = input('Новое название: ')
         os.rename(f"{direct}/{naming}", f"{direct}/{new_name}")
-
-
-
-
-
-

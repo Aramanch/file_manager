@@ -4,6 +4,8 @@ from sets import *
 
 
 
+
+
 print("Файловый менеджер: \n" 
       "1.Создать папку \n"
       "2.Удалить папку \n"
@@ -15,21 +17,25 @@ print("Файловый менеджер: \n"
       "8.Удалить файл \n"
       "9.Скопировать файл в другую папку \n"
       "10.Переместить файл \n"
-      "11.Переименовать файл")
+      "11.Переименовать файл \n"
+      "12.Содержимое папки")
 
 request = ''
 
-while request != 'end':
-    request = input()
 
 
 
-    if  request == "1":
+
+
+def create():
         name = input()
-        new_path = f"{direct}/{name}".format(name=name)
+        nerka = os.getcwd()
+        new_path = f"{nerka}/{name}".format(name=name)
         os.mkdir(new_path)
 
-    elif request == "2":
+
+
+def deleting():
         try:
             name = input()
             dirrr = f"{direct}/{name}"
@@ -44,58 +50,126 @@ while request != 'end':
                 print(os.getcwd())
 
 
-    elif request == "3":
-        name = input()
-        dirrr = f"{direct}/{name}"
-        os.chdir(dirrr)
+
+
+def walking():
+      namme = input()
+      directionn = os.getcwd()
+      new_dir = f"{directionn}/{namme}"
+      os.chdir(new_dir)
+      print(os.getcwd())
+
+
+
+def changing():
+        os.chdir(direct)
         print(os.getcwd())
 
 
 
-    elif request == "4":
-        os.chdir(f"{direct}")
-        print(os.getcwd())
 
-    elif request == "17":
+def spisok():
         print(os.listdir(f"{os.getcwd()}"))
 
-    elif request == "5":
+
+
+
+def sozdat():
         name = input('Имя файла:')
         open(name,'w')
         print(os.getcwd())
 
 
-    elif request == "6":
+
+
+def writing():
         name = str(input('Файл: '))
         f = open(name,'w')
         f.write(input())
         f.close()
 
-    elif request == "7":
+
+
+def reading():
         name = str(input())
         f = open(name)
         print(f.read())
 
-    elif request == "8":
+
+
+
+
+def udaling():
         name = input()
         os.remove(name)
         print("Готово!")
 
 
 
-    elif request == "9":
+
+
+
+def copying():
         papka = input("Папка, из которой копируем: ")
         name = input('Файл: ')
         ppapka = input("Папка, в которую копируем: ")
         shutil.copy(f"{direct}/{papka}/{name}",f"{direct}/{ppapka}")
 
-    elif request == "10":
+
+
+def replacing():
         cur_kat = os.getcwd()
         naming = input('Файл: ')
         ppapkka = input("Папка, в которую перемещаем: ")
         os.replace(f"{cur_kat}/{naming}", f"{direct}/{ppapkka}/{naming}")
 
-    elif request == "11":
+
+
+def renaming():
         naming = input('Файл: ')
         new_name = input('Новое название: ')
-        os.rename(f"{direct}/{naming}", f"{direct}/{new_name}")
+        direction = os.getcwd()
+        os.rename(f"{direction}/{naming}", f"{direction}/{new_name}")
+
+
+while request != 'end':
+    request = input()
+
+
+    if request == "1":
+        create()
+
+    elif request == "2":
+        deleting()
+
+    elif request == "3":
+        walking()
+
+    elif request == "4":
+        changing()
+
+    elif request == "5":
+        sozdat()
+
+    elif request == "6":
+        writing()
+
+    elif request == "7":
+        reading()
+
+    elif request == "8":
+        udaling()
+
+    elif request == "9":
+        copying()
+
+    elif request == "10":
+        replacing()
+
+    elif request == "11":
+        renaming()
+
+    elif request == "12":
+        spisok()
+
+    

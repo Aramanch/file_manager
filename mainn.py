@@ -30,7 +30,7 @@ request = ''
 def create():
         name = input()
         nerka = os.getcwd()
-        new_path = f"{nerka}/{name}".format(name=name)
+        new_path = f"{nerka} + os.sep + {name}".format(name=name)
         os.mkdir(new_path)
 
 
@@ -38,7 +38,7 @@ def create():
 def deleting():
         try:
             name = input()
-            dirrr = f"{direct}/{name}"
+            dirrr = f"{direct} + os.sep + {name}"
             os.rmdir(dirrr)
         except OSError:
             askk = input("Вы уверены, что хотите удалить непустую папку?: ")
@@ -53,9 +53,10 @@ def deleting():
 
 
 def walking():
+      global directionnn
       namme = input()
-      directionn = os.getcwd()
-      new_dir = f"{directionn}/{namme}"
+      directionnn = os.getcwd()
+      new_dir = f"{directionnn} + os.sep + {namme}"
       os.chdir(new_dir)
       print(os.getcwd())
 
@@ -104,7 +105,10 @@ def udaling():
         os.remove(name)
         print("Готово!")
 
-
+def backwk():
+      global directionnn
+      os.chdir(directionnn)
+      
 
 
 
@@ -113,7 +117,7 @@ def copying():
         papka = input("Папка, из которой копируем: ")
         name = input('Файл: ')
         ppapka = input("Папка, в которую копируем: ")
-        shutil.copy(f"{direct}/{papka}/{name}",f"{direct}/{ppapka}")
+        shutil.copy(f"{direct} + os.sep + {papka} + os.sep + {name}",f"{direct} + os.sep + {ppapka}")
 
 
 
@@ -121,7 +125,7 @@ def replacing():
         cur_kat = os.getcwd()
         naming = input('Файл: ')
         ppapkka = input("Папка, в которую перемещаем: ")
-        os.replace(f"{cur_kat}/{naming}", f"{direct}/{ppapkka}/{naming}")
+        os.replace(f"{cur_kat} + os.sep + {naming}", f"{direct} + os.sep + {ppapkka} + os.sep + {naming}")
 
 
 
@@ -129,7 +133,7 @@ def renaming():
         naming = input('Файл: ')
         new_name = input('Новое название: ')
         direction = os.getcwd()
-        os.rename(f"{direction}/{naming}", f"{direction}/{new_name}")
+        os.rename(f"{direction} + os.sep + {naming}", f"{direction} + os.sep + {new_name}")
 
 
 while request != 'end':

@@ -1,12 +1,8 @@
 import os
 import shutil
-from sets import *
+from settings import *
 
-
-
-
-
-print("Файловый менеджер: \n" 
+print("Файловый менеджер: \n"
       "1.Создать папку \n"
       "2.Удалить папку \n"
       "3.Переместиться \n"
@@ -18,127 +14,103 @@ print("Файловый менеджер: \n"
       "9.Скопировать файл в другую папку \n"
       "10.Переместить файл \n"
       "11.Переименовать файл \n"
-      "12.Содержимое папки")
+      "12.Содержимое папки \n"
+      "13.Вернуться назад")
 
 request = ''
 
 
-
-
-
-
 def create():
-        name = input()
-        nerka = os.getcwd()
-        new_path = f"{nerka} + os.sep + {name}".format(name=name)
-        os.mkdir(new_path)
-
+    name = input('Название папки:')
+    new_path = os.getcwd() + os.sep + name
+    os.mkdir(new_path)
+    print('Готово!')
 
 
 def deleting():
-        try:
-            name = input()
-            dirrr = f"{direct} + os.sep + {name}"
-            os.rmdir(dirrr)
-        except OSError:
-            askk = input("Вы уверены, что хотите удалить непустую папку?: ")
-            if askk == 'да':
-                shutil.rmtree(dirrr)
-                print("Готово!")
-            else:
-                os.chdir(direct)
-                print(os.getcwd())
-
-
+    try:
+        name = input('Папка: ')
+        dir_for_del = os.path.dirname(os.getcwd())
+        dirrr = os.getcwd() + os.sep + name
+        os.rmdir(dirrr)
+    except OSError:
+        askk = input("Вы уверены, что хотите удалить непустую папку?: ")
+        if askk == 'да':
+            shutil.rmtree(dirrr)
+            print("Готово!")
+        else:
+            os.chdir(dir_for_del)
+            print(os.getcwd())
 
 
 def walking():
-      global directionnn
-      namme = input()
-      directionnn = os.getcwd()
-      new_dir = f"{directionnn} + os.sep + {namme}"
-      os.chdir(new_dir)
-      print(os.getcwd())
+    namme = input('Куда: ')
+    new_dir = os.getcwd() + os.sep + namme
+    os.chdir(new_dir)
+    print(os.getcwd())
 
 
-
-def changing():
-        os.chdir(direct)
-        print(os.getcwd())
-
-
+def backhome():
+    global working_path
+    os.chdir(working_path)
+    print(os.getcwd())
 
 
 def spisok():
-        print(os.listdir(f"{os.getcwd()}"))
-
-
+    print(os.listdir(os.getcwd()))
 
 
 def sozdat():
-        name = input('Имя файла:')
-        open(name,'w')
-        print(os.getcwd())
-
-
+    name = input('Имя файла:')
+    open(name, 'w')
+    print('Файл создан в: ' + os.getcwd())
 
 
 def writing():
-        name = str(input('Файл: '))
-        f = open(name,'w')
-        f.write(input())
-        f.close()
-
+    name = str(input('Файл: '))
+    f = open(name, 'w')
+    f.write(input())
+    f.close()
 
 
 def reading():
-        name = str(input())
-        f = open(name)
-        print(f.read())
-
-
-
+    name = str(input('Файл: '))
+    f = open(name)
+    print(f.read())
 
 
 def udaling():
-        name = input()
-        os.remove(name)
-        print("Готово!")
-
-def backwk():
-      global directionnn
-      os.chdir(directionnn)
-      
-
+    name = input('Файл: ')
+    os.remove(name)
+    print("Готово!")
 
 
 
 def copying():
-        papka = input("Папка, из которой копируем: ")
-        name = input('Файл: ')
-        ppapka = input("Папка, в которую копируем: ")
-        shutil.copy(f"{direct} + os.sep + {papka} + os.sep + {name}",f"{direct} + os.sep + {ppapka}")
-
+    global working_path
+    name = input('Файл: ')
+    ppapka = input("Папка, в которую копируем: ")
+    shutil.copy(os.getcwd() + os.sep + name, working_path + os.sep + ppapka)
+    print('Скопировано!')
 
 
 def replacing():
-        cur_kat = os.getcwd()
-        naming = input('Файл: ')
-        ppapkka = input("Папка, в которую перемещаем: ")
-        os.replace(f"{cur_kat} + os.sep + {naming}", f"{direct} + os.sep + {ppapkka} + os.sep + {naming}")
-
+    global working_path
+    naming = input('Файл: ')
+    ppapkka = input("Папка, в которую перемещаем: ")
+    os.replace(os.getcwd() + os.sep + naming, working_path + os.sep + ppapkka + os.sep + naming)
+    print('Перемещено!')
 
 
 def renaming():
-        naming = input('Файл: ')
-        new_name = input('Новое название: ')
-        direction = os.getcwd()
-        os.rename(f"{direction} + os.sep + {naming}", f"{direction} + os.sep + {new_name}")
+    naming = input('Файл: ')
+    new_name = input('Новое название: ')
+    os.rename(os.getcwd() + os.sep + naming, os.getcwd() + os.sep + new_name)
+    print('Переименовано!')
 
 
 while request != 'end':
     request = input()
-
 
     if request == "1":
         create()
@@ -150,7 +122,7 @@ while request != 'end':
         walking()
 
     elif request == "4":
-        changing()
+        backhome()
 
     elif request == "5":
         sozdat()
@@ -176,4 +148,7 @@ while request != 'end':
     elif request == "12":
         spisok()
 
-    
+    elif request == "13":
+        backwk()
+
+
